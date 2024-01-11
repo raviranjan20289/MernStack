@@ -32,7 +32,7 @@ const Register = () => {
             <div className="container grid grid-two-cols">
               <div className="registration-image reg-img">
                 <img
-                  src="/public/images/registration.jpg"
+                  src="public/images/register.png"
                   alt="welcome to mern Series"
                   width="400"
                   height="500"

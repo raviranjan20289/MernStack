@@ -29,7 +29,7 @@ const Login = () => {
             <div className="container grid grid-two-cols">
               <div className="registration-image reg-img">
                 <img
-                  src="public/images/register1.png"
+                  src="public/images/login.png"
                   alt="Sorry the image is disappeared"
                   width="400"
                   height="500"
