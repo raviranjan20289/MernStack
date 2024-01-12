@@ -1,11 +1,14 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import Auth from "../store/auth";
 const Login = () => {
   const [user, setUser] = useState({
-    username: "",
-    password: "",
+    Email: "",
+    Password: "",
   });
 
+  const navigate = useNavigate();
+  const { storeTokenInLS } = Auth.useAuth();
   const handleInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -16,9 +19,32 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user);
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      console.log("response data :", response);
+
+      if (response.ok) {
+        const responseData = await response.json();
+        storeTokenInLS(responseData.token);
+        alert("Login successful");
+        setUser({ Email: "", Password: "" });
+        navigate("/");
+        console.log("here is your response data", responseData);
+      } else {
+        console.log("error inside response");
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
   };
 
   return (
@@ -44,8 +70,8 @@ const Login = () => {
                     <label htmlFor="email">email</label>
                     <input
                       type="text"
-                      name="email"
-                      value={user.email}
+                      name="Email"
+                      value={user.Email}
                       onChange={handleInput}
                       placeholder="email"
                       autoComplete="email"
@@ -56,8 +82,8 @@ const Login = () => {
                     <label htmlFor="password">password</label>
                     <input
                       type="password"
-                      name="password"
-                      value={user.password}
+                      name="Password"
+                      value={user.Password}
                       onChange={handleInput}
                       placeholder="password"
                       autoComplete="current-password"

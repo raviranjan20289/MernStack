@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Auth from "../store/auth";
+
 const Register = () => {
   const [user, setUser] = useState({
     Username: "",
@@ -9,6 +11,7 @@ const Register = () => {
   });
 
   const navigate = useNavigate();
+  const { storeTokenInLS } = Auth.useAuth();
 
   const handleInput = (e) => {
     console.log(e);
@@ -37,6 +40,9 @@ const Register = () => {
 
       if (response.ok) {
         const responseData = await response.json();
+        // we will not store token like this we will use context api for this.
+        // localStorage.setItem("token", responseData.token);
+        storeTokenInLS(responseData.token);
         alert("registration successful");
         setUser({ Username: "", Email: "", Phone: "", Password: "" });
         navigate("/login");
