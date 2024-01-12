@@ -6,7 +6,6 @@ const Contact = () => {
     message: "",
   });
 
-  // lets tackle our handleInput
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -17,14 +16,11 @@ const Contact = () => {
     });
   };
 
-  // handle fomr getFormSubmissionInfo
   const handleSubmit = (e) => {
     e.preventDefault();
 
     console.log(contact);
   };
-
-  //  Help me reach 1 Million subs 👉 https://youtube.com/thapatechnical
 
   return (
     <>
@@ -53,6 +49,7 @@ const Contact = () => {
                   autoComplete="off"
                   value={contact.username}
                   onChange={handleInput}
+                  placeholder="username"
                   required
                 />
               </div>
@@ -66,6 +63,7 @@ const Contact = () => {
                   autoComplete="off"
                   value={contact.email}
                   onChange={handleInput}
+                  placeholder="john@gmail.com"
                   required
                 />
               </div>
@@ -77,6 +75,7 @@ const Contact = () => {
                   id="message"
                   autoComplete="off"
                   value={contact.message}
+                  placeholder="xyz..."
                   onChange={handleInput}
                   required
                   cols="30"
@@ -93,7 +92,7 @@ const Contact = () => {
 
         <section className="mb-3">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.2613173278896!2d73.91411937501422!3d18.562253982539413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c147b8b3a3bf%3A0x6f7fdcc8e4d6c77e!2sPhoenix%20Marketcity%20Pune!5e0!3m2!1sen!2sin!4v1697604225432!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28785.315922041482!2d85.06295611083982!3d25.599449800000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed57f3fb941a21%3A0xf6abc879953c9a14!2sSanjay%20Gandhi%20Biological%20Park%2C%20Patna!5e0!3m2!1sen!2sin!4v1705049550263!5m2!1sen!2sin"
             width="100%"
             height="450"
             allowFullScreen

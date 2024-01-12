@@ -50,7 +50,7 @@ const Register = () => {
                       name="username"
                       value={user.username}
                       onChange={handleInput}
-                      placeholder="username"
+                      placeholder="john"
                       autoComplete="username"
                     />
                   </div>
@@ -61,7 +61,7 @@ const Register = () => {
                       name="email"
                       value={user.email}
                       onChange={handleInput}
-                      placeholder="email"
+                      placeholder="john@gmail.com"
                       autoComplete="email"
                     />
                   </div>
@@ -71,6 +71,7 @@ const Register = () => {
                       type="number"
                       name="phone"
                       value={user.phone}
+                      placeholder="1234567891"
                       onChange={handleInput}
                       autoComplete="phone"
                     />
