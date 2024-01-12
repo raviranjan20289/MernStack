@@ -1,12 +1,14 @@
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [user, setUser] = useState({
-    username: "",
-    email: "",
-    phone: "",
-    password: "",
+    Username: "",
+    Email: "",
+    Phone: "",
+    Password: "",
   });
+
+  const navigate = useNavigate();
 
   const handleInput = (e) => {
     console.log(e);
@@ -19,9 +21,32 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(user);
+
+    try {
+      const response = await fetch("http://localhost:3000/api/v1/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
+      console.log("response data : ", response);
+
+      if (response.ok) {
+        const responseData = await response.json();
+        alert("registration successful");
+        setUser({ Username: "", Email: "", Phone: "", Password: "" });
+        navigate("/login");
+        console.log(responseData);
+      } else {
+        console.log("error inside response ", "error");
+      }
+    } catch (error) {
+      console.error("Error", error);
+    }
   };
 
   return (
@@ -47,8 +72,8 @@ const Register = () => {
                     <label htmlFor="username">username</label>
                     <input
                       type="text"
-                      name="username"
-                      value={user.username}
+                      name="Username"
+                      value={user.Username}
                       onChange={handleInput}
                       placeholder="john"
                       autoComplete="username"
@@ -58,8 +83,8 @@ const Register = () => {
                     <label htmlFor="email">email</label>
                     <input
                       type="text"
-                      name="email"
-                      value={user.email}
+                      name="Email"
+                      value={user.Email}
                       onChange={handleInput}
                       placeholder="john@gmail.com"
                       autoComplete="email"
@@ -69,8 +94,8 @@ const Register = () => {
                     <label htmlFor="phone">phone</label>
                     <input
                       type="number"
-                      name="phone"
-                      value={user.phone}
+                      name="Phone"
+                      value={user.Phone}
                       placeholder="1234567891"
                       onChange={handleInput}
                       autoComplete="phone"
@@ -80,8 +105,8 @@ const Register = () => {
                     <label htmlFor="password">password</label>
                     <input
                       type="password"
-                      name="password"
-                      value={user.password}
+                      name="Password"
+                      value={user.Password}
                       onChange={handleInput}
                       placeholder="password"
                       autoComplete="current-password"
